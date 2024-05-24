@@ -25,7 +25,7 @@ module.exports = {
       accounts: [process.env.PRIVATE_KEY_TEST]
     },
     base: {
-      url: process.env.BASE_SEPOLIA_RPC_URL,
+      url: process.env.BASE_MAINNET_RPC_URL,
       accounts: [process.env.PRIVATE_KEY_TEST]
     },
     amoy: {

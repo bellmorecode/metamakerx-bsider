@@ -3,8 +3,7 @@ pragma solidity ^0.8.19;
 
 import "./ERC721A.sol";
 import "./Ownable.sol";
-/*
-###############*************#**********************************#**########################
+/*###############*************#**********************************#**######################
 #########**#*************************************************************#################
 #########**********************************************#***************#*#################
 ########*****#**#***+++++++++++++++++++++++++++++++++++++++++++++*******##################
@@ -50,44 +49,32 @@ import "./Ownable.sol";
 ******************************************************************************************
 ********************************************************* 2024 ***************************
 ++****************************************************************************************
-++++**************************************************************************************
-
-*/
-
+++++**************************************************************************************/
 contract bsider is Ownable, ERC721A {
-
     uint256 public tokenPrice = 0.02 ether;
-    
     bool public mintPaused; 
     string private _baseTokenURI = "https://metamakerx.com/bsider/data/";
-
     constructor() ERC721A("bsider", "bsider") {
         mintPaused = false;
     }
-
     function mint(address to, uint256 quantity) external payable {
         require(!mintPaused, "Mint is paused");
         require(msg.value >= quantity * tokenPrice, "Insufficient Funds");
         _mint(to, quantity);
     }
-
     function setCost(uint256 _cost) public onlyOwner {
             tokenPrice = _cost;
     }
-
     function withdraw() external onlyOwner {
         (bool success, ) = msg.sender.call{value: address(this).balance}("");
         require(success, "Transfer Failed");
     }
-
     function setBaseURI(string calldata baseURI) external onlyOwner {
         _baseTokenURI = baseURI;
     }
-
     function _baseURI() internal view override returns (string memory) {
         return _baseTokenURI;
     }
-
     function pauseMint(bool _paused) external onlyOwner {
         mintPaused = _paused;
     }
