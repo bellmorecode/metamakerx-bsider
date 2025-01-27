@@ -3,6 +3,7 @@ require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
+  defaultNetwork: "base",
   solidity: {
     version: "0.8.20",
     settings: {
@@ -14,7 +15,7 @@ module.exports = {
   },
   networks: {
     hardhat: {
-      chainId: 1337,
+      chainId: 8453,
     },
     sepolia: {
       url: process.env.SEPOLIA_RPC_URL,
